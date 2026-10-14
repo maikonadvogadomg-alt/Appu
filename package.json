@@ -1,0 +1,85 @@
+{
+  "name": "appide",
+  "version": "2.9.0",
+  "description": "AppIDE — App desktop (Windows, Mac, Linux)",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --publish=never",
+    "build:win": "electron-builder --win --x64 --publish=never",
+    "build:mac": "electron-builder --mac --x64 --arm64 --publish=never",
+    "build:linux": "electron-builder --linux --x64 --publish=never"
+  },
+  "build": {
+    "appId": "com.devmobile.ide",
+    "productName": "AppIDE",
+    "copyright": "© 2026 AppIDE",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "www/**/*",
+      "!www/package.json",
+      "!www/**/package.json",
+      "!www/**/*.map"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "sign": null
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "AppIDE"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "identity": null,
+      "hardenedRuntime": false
+    },
+    "dmg": {
+      "background": null
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Utility",
+      "description": "AppIDE — App desktop"
+    },
+    "compression": "normal",
+    "removePackageScripts": true,
+    "nodeGypRebuild": false,
+    "buildDependenciesFromSource": false
+  },
+  "devDependencies": {
+    "electron": "^33.4.0",
+    "electron-builder": "^25.1.8"
+  }
+}
